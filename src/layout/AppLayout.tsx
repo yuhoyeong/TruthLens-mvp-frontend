@@ -2,20 +2,18 @@ import Header from "./Header";
 import SideBar from "./SideBar";
 
 interface AppLayoutProps {
-  readonly children: React.ReactNode; 
+  readonly children: React.ReactNode;
 }
 
 export default function AppLayout({ children }: AppLayoutProps) {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen bg-background">
       <Header />
 
-      <div className="flex flex-1">
+      <div className="flex flex-1 overflow-hidden">
         <SideBar />
 
-        <main className="flex-1 p-4 bg-[#F7F7F7]">
-          {children}
-        </main>
+        <main className="flex-1 overflow-y-auto bg-neutral-99">{children}</main>
       </div>
     </div>
   );
