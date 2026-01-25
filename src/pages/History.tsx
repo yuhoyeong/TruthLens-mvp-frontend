@@ -1,38 +1,20 @@
+import List from "@/components/History/List";
 import { historyDetail, historyItems } from "@/data/history.mock";
 import {
-  AlertTriangle,
   CalendarDays,
-  CheckCircle2,
   ChevronDown,
   FileDown,
-  Filter,
   Share2,
-  TriangleAlert,
 } from "lucide-react";
+import { useState } from "react";
 
-const getStatusStyles = (status: string) => {
-  if (status === "위험") {
-    return {
-      text: "text-red-600",
-      bg: "bg-red-50",
-      icon: <TriangleAlert size={14} className="text-red-500" />,
-    };
-  }
-  if (status === "주의") {
-    return {
-      text: "text-amber-700",
-      bg: "bg-amber-50",
-      icon: <AlertTriangle size={14} className="text-amber-500" />,
-    };
-  }
-  return {
-    text: "text-emerald-700",
-    bg: "bg-emerald-50",
-    icon: <CheckCircle2 size={14} className="text-emerald-500" />,
-  };
-};
+
 
 export default function History() {
+  const [selectedId, setSelectedId] = useState(historyItems[0]?.id);
+  const detail = historyDetail.find((d) => d.id === selectedId);
+
+
   return (
     <div className="p-8 max-w-[1200px] mx-auto">
       <header className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between mb-6">
@@ -45,7 +27,7 @@ export default function History() {
         </div>
 
         {/* toggle */}
-        <div className="p-4 border-b border-neutral-90 flex items-center gap-2">
+        <div className="p-4 flex items-center gap-2">
           <CalendarDays size={16} className="text-neutral-50" />
           <button className="px-3 py-2 text-label-2 text-neutral-50 bg-white border border-neutral-90 rounded-lg flex items-center gap-2">
             전체 기간
@@ -64,41 +46,16 @@ export default function History() {
 
       <div className="bg-white border border-neutral-90 rounded-2xl">
         <div className="flex flex-col lg:flex-row">
+          {/* left side list */}
           <aside className="w-full lg:w-[320px] border-b lg:border-b-0 lg:border-r border-neutral-90">
-
-            <div className="divide-y divide-neutral-90">
-              {historyItems.map((item, index) => {
-                const styles = getStatusStyles(item.status);
-                return (
-                  <div
-                    key={`${item.title}-${index}`}
-                    className={`px-4 py-3 flex items-center justify-between ${
-                      index === 0 ? styles.bg : "bg-white"
-                    }`}
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="pt-1">{styles.icon}</div>
-                      <div>
-                        <p className={`text-label-2 ${styles.text}`}>
-                          {item.status}
-                        </p>
-                        <p className="text-body-2 text-neutral-10 mt-1">
-                          {item.title}
-                        </p>
-                        <p className="text-caption-2 text-neutral-60 mt-1">
-                          이미지 분석
-                        </p>
-                      </div>
-                    </div>
-                    <p className="text-caption-2 text-neutral-60">
-                      {item.time}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+            <List 
+              items={historyItems}
+              selectedId={selectedId}
+              onSelect={setSelectedId}
+            />
           </aside>
 
+          {/* analyzed screen */}
           <main className="flex-1 p-6">
             <div className="flex items-start justify-between">
               <div>
@@ -106,7 +63,7 @@ export default function History() {
                   분석 상세 내역
                 </h2>
                 <p className="text-caption-2 text-neutral-60 mt-1">
-                  분석일: 2026-01-11 14:30
+                  분석일: {detail?.analyzedAt}
                 </p>
               </div>
               <div className="flex items-center gap-2">
@@ -163,7 +120,7 @@ export default function History() {
                   세부 분석 항목
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {historyDetail.scores.map((item) => (
+                  {detail?.scores.map((item) => (
                     <div
                       key={item.title}
                       className="border border-neutral-90 rounded-2xl p-4 bg-white"
@@ -175,7 +132,7 @@ export default function History() {
                         {item.desc}
                       </p>
                       <p className="text-title-3 text-neutral-10 mt-3">
-                        {item.value}
+                        {item.value}%
                       </p>
                     </div>
                   ))}
