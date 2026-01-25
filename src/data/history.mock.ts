@@ -23,9 +23,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
@@ -43,9 +43,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
@@ -63,9 +63,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
@@ -83,9 +83,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
@@ -103,9 +103,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
@@ -123,9 +123,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
@@ -143,9 +143,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
@@ -163,9 +163,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
@@ -183,9 +183,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
@@ -203,9 +203,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
@@ -223,9 +223,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
@@ -243,9 +243,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
@@ -263,9 +263,9 @@ export const historyDetail: HistoryDetail[] = [
     imageLabel: "뉴스 기사 이미지",
     aiScore: 73,
     scores: [
-      { title: "픽셀 노이즈 패턴", desc: "합성 시 생성되는 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 복원 또는 조작 추적", value: 62 },
-      { title: "맥락적 일관성", desc: "객관성과 일관성 점검", value: 85 },
+      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
+      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
+      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
       { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
     ],
     riskSummary:
