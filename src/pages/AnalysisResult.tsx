@@ -10,22 +10,20 @@ import {
 } from "@/components";
 import { useJobStatus } from "@/hooks";
 import ApiScoreCards from "@/components/History/ApiScoreCards";
+import type { AnalysisResult } from "@/api";
 
 export default function AnalysisResult() {
   const { jobId } = useParams<{ jobId: string }>();
   const navigate = useNavigate();
 
-  // Job ID가 없으면 홈으로 리다이렉트
   useEffect(() => {
     if (!jobId) {
       navigate("/");
     }
   }, [jobId, navigate]);
 
-  // Job 상태 조회
   const { data: jobStatus, isLoading, error } = useJobStatus(jobId);
 
-  // 로딩 상태
   if (
     isLoading ||
     (jobStatus &&
@@ -35,7 +33,6 @@ export default function AnalysisResult() {
     return <AnalysisLoading jobStatus={jobStatus} />;
   }
 
-  // 에러 상태 또는 실패 상태
   if (error || jobStatus?.status === "failed") {
     return (
       <AnalysisError
@@ -47,16 +44,29 @@ export default function AnalysisResult() {
     );
   }
 
-  // 분석 결과가 없는 경우
-  if (!jobStatus?.result) {
-    return <AnalysisLoading jobStatus={jobStatus} />;
+  const rawResult = jobStatus?.result;
+
+  const isValidAnalysisResult = (r: unknown): r is AnalysisResult => {
+    if (!r || typeof r !== "object") return false;
+    const obj = r as any;
+    return (
+      obj.scores &&
+      typeof obj.scores === "object" &&
+      (typeof obj.summary === "string" || typeof obj.summary === "undefined")
+    );
+  };
+
+  if (!rawResult || !isValidAnalysisResult(rawResult)) {
+    const anyRaw = rawResult as any;
+    const message =
+      anyRaw?.message || anyRaw?.status || "분석 결과가 준비되지 않았습니다.";
+    return <AnalysisLoading jobStatus={jobStatus} message={message} />;
   }
 
-  const analysisResult = jobStatus.result;
+  const analysisResult = rawResult as AnalysisResult;
 
   return (
     <div className="p-8 max-w-[1200px] mx-auto">
-      {/* Header */}
       <header className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between mb-6">
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
@@ -85,15 +95,12 @@ export default function AnalysisResult() {
         </div>
       </header>
 
-      {/* 위험도 요약 */}
       <RiskSummary result={analysisResult} />
 
-      {/* 스코어 카드들 */}
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
         <ApiScoreCards scores={analysisResult.scores} />
       </div>
 
-      {/* 상세 분석 결과 */}
       <AnalysisDetail
         result={analysisResult}
         jobId={jobId!}

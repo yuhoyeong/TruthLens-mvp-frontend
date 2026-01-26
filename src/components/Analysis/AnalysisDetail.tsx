@@ -1,7 +1,7 @@
 import type { AnalysisResult, JobStatusResponse } from "@/api/types";
 
 interface AnalysisDetailProps {
-  result: AnalysisResult;
+  result?: AnalysisResult | null;
   jobId: string;
   jobStatus?: JobStatusResponse;
 }
@@ -11,6 +11,10 @@ export default function AnalysisDetail({
   jobId,
   jobStatus,
 }: AnalysisDetailProps) {
+  const summary = result?.summary ?? "-";
+  const recommendations = Array.isArray(result?.recommendations)
+    ? result!.recommendations
+    : [];
   const getInputTypeText = (inputType?: string) => {
     switch (inputType) {
       case "image":
@@ -26,14 +30,14 @@ export default function AnalysisDetail({
     <div className="bg-white rounded-xl p-6 border border-neutral-90">
       <h3 className="text-title-3 text-neutral-10 mb-4">분석 요약</h3>
       <p className="text-body-1-r text-neutral-30 mb-6 leading-relaxed">
-        {result.summary}
+        {summary}
       </p>
 
-      {result.recommendations.length > 0 && (
+      {recommendations.length > 0 && (
         <>
           <h4 className="text-title-4 text-neutral-10 mb-3">권장사항</h4>
           <ul className="space-y-2">
-            {result.recommendations.map((recommendation, index) => (
+            {recommendations.map((recommendation, index) => (
               <li
                 key={index}
                 className="flex items-start gap-3 text-body-2-r text-neutral-30"
