@@ -1,10 +1,9 @@
 import type { TextAnalysisCriteria } from "@/api/types";
 
 type ApiScoreCardsProps = {
-  scores: TextAnalysisCriteria;
+  scores?: Partial<TextAnalysisCriteria> | null;
 };
 
-// 스코어 항목별 한글 설명과 최대값
 const SCORE_CONFIG = {
   source_reliability: { title: "출처의 신뢰도", max: 15, icon: "🔍" },
   source_consistency: { title: "자료의 일관성", max: 10, icon: "📊" },
@@ -19,10 +18,7 @@ const SCORE_CONFIG = {
 } as const;
 
 export default function ApiScoreCards({ scores }: ApiScoreCardsProps) {
-  const scoreEntries = Object.entries(scores) as [
-    keyof TextAnalysisCriteria,
-    number,
-  ][];
+  const scoreKeys = Object.keys(SCORE_CONFIG) as (keyof typeof SCORE_CONFIG)[];
 
   const getScoreColor = (score: number, max: number) => {
     const percentage = (score / max) * 100;
@@ -37,8 +33,10 @@ export default function ApiScoreCards({ scores }: ApiScoreCardsProps) {
 
   return (
     <>
-      {scoreEntries.map(([key, value]) => {
+      {scoreKeys.map((key) => {
         const config = SCORE_CONFIG[key];
+        const value =
+          scores && typeof scores[key] === "number" ? scores[key] : 0;
         const percentage = getScorePercentage(value, config.max);
         const colorClass = getScoreColor(value, config.max);
 

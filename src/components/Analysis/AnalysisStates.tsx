@@ -4,9 +4,13 @@ import type { JobStatusResponse } from "@/api";
 
 interface AnalysisLoadingProps {
   jobStatus?: JobStatusResponse;
+  message?: string;
 }
 
-export default function AnalysisLoading({ jobStatus }: AnalysisLoadingProps) {
+export default function AnalysisLoading({
+  jobStatus,
+  message,
+}: AnalysisLoadingProps) {
   const getStatusText = (status?: string) => {
     switch (status) {
       case "queued":
@@ -27,6 +31,9 @@ export default function AnalysisLoading({ jobStatus }: AnalysisLoadingProps) {
           <p className="text-body-1-r text-neutral-50">
             AI가 콘텐츠를 분석하고 있습니다. 잠시만 기다려주세요.
           </p>
+          {message && (
+            <p className="text-body-3-r text-neutral-60 mt-2">{message}</p>
+          )}
           {jobStatus && (
             <div className="mt-4">
               <p className="text-body-3-r text-neutral-60">

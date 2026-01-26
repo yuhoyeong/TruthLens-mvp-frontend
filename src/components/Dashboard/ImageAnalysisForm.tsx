@@ -30,21 +30,28 @@ const ImageAnalysisForm = () => {
     },
   );
 
-  if (jobStatus?.status === "completed") {
-    navigate(`/analysis-result/${currentJobId}`);
-  }
+  React.useEffect(() => {
+    if (jobStatus?.status === "completed" && currentJobId) {
+      navigate(`/analysis-result/${currentJobId}`);
+    }
+  }, [jobStatus, currentJobId, navigate]);
 
-  if (jobStatus?.status === "failed") {
-    console.error("분석 실패:", jobStatus.error_message);
-    setCurrentJobId(null);
-  }
+  React.useEffect(() => {
+    if (jobStatus?.status === "failed") {
+      setCurrentJobId(null);
+    }
+  }, [jobStatus]);
 
   const isAnalyzing =
-    analyzeImageMutation.isPending || analyzeUrlMutation.isPending || isPolling;
+    analyzeImageMutation.status === "pending" ||
+    analyzeUrlMutation.status === "pending" ||
+    isPolling;
 
-  const handleFileSelect = (files: FileList) => {
-    setSelectedFile(files[0]);
-    console.log("Selected file:", files[0]);
+  const handleFileSelect = (files: File | FileList) => {
+    const file = files instanceof FileList ? files[0] : files;
+    if (file) {
+      setSelectedFile(file);
+    }
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,8 +74,8 @@ const ImageAnalysisForm = () => {
           file: selectedFile,
           note: "이미지 위변조 분석 요청",
         });
-        setCurrentJobId(result.job_id);
-        console.log("이미지 분석 시작됨, Job ID:", result.job_id);
+        const delayMs = 700;
+        setTimeout(() => setCurrentJobId(result.job_id), delayMs);
       } else if (activeTab === "link" && linkInput.trim()) {
         const inputType =
           linkInput.includes("/article/") ||
@@ -83,11 +90,11 @@ const ImageAnalysisForm = () => {
           note:
             inputType === "link" ? "기사 분석 요청" : "이미지 URL 분석 요청",
         });
-        setCurrentJobId(result.job_id);
-        console.log(`${inputType} 분석 시작됨, Job ID:`, result.job_id);
+        const delayMs = 700;
+        setTimeout(() => setCurrentJobId(result.job_id), delayMs);
       }
-    } catch (error) {
-      console.error("분석 요청 실패:", error);
+    } catch {
+      setCurrentJobId(null);
     }
   };
 
