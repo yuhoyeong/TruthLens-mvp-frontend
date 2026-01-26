@@ -1,6 +1,7 @@
 export { default as Button } from "./Button";
 export { default as FileUpload } from "./FileUpload";
 export { default as Input } from "./Input";
+export * from "./Analysis";
 import {
   TabsRoot,
   TabsList,
