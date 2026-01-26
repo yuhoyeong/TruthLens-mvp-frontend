@@ -5,6 +5,7 @@ import Legal from "@/pages/Legal";
 import Export from "@/pages/Export";
 import Help from "@/pages/Help";
 import Settings from "@/pages/Settings";
+import AnalysisResult from "@/pages/AnalysisResult";
 import AppLayout from "@/layout/AppLayout";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <AppLayout>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/analysis-result/:jobId" element={<AnalysisResult />} />
           <Route path="/history" element={<History />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/export" element={<Export />} />

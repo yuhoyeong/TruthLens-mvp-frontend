@@ -20,14 +20,21 @@ interface TabsRootProps {
   defaultValue: string;
   children: ReactNode;
   onChange?: (value: string) => void;
+  onValueChange?: (value: string) => void;
 }
 
-export function TabsRoot({ defaultValue, children, onChange }: TabsRootProps) {
+export function TabsRoot({
+  defaultValue,
+  children,
+  onChange,
+  onValueChange,
+}: TabsRootProps) {
   const [activeTab, setActiveTabState] = useState(defaultValue);
 
   const setActiveTab = (tab: string) => {
     setActiveTabState(tab);
     onChange?.(tab);
+    onValueChange?.(tab);
   };
 
   return (

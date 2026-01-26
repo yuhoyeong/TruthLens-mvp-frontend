@@ -1,21 +1,12 @@
 import Detail from "@/components/History/Detail";
 import List from "@/components/History/List";
-import ScoreCards from "@/components/History/ScoreCards";
 import { historyDetail, historyItems } from "@/data/history.mock";
-import {
-  CalendarDays,
-  ChevronDown,
-  FileDown,
-  Share2,
-} from "lucide-react";
+import { CalendarDays, ChevronDown } from "lucide-react";
 import { useState } from "react";
-
-
 
 export default function History() {
   const [selectedId, setSelectedId] = useState(historyItems[0]?.id);
   const detail = historyDetail.find((d) => d.id === selectedId);
-
 
   return (
     <div className="p-8 max-w-[1200px] mx-auto">
@@ -50,7 +41,7 @@ export default function History() {
         <div className="flex flex-col lg:flex-row">
           {/* left side list */}
           <aside className="w-full lg:w-[320px] border-b lg:border-b-0 lg:border-r border-neutral-90">
-            <List 
+            <List
               items={historyItems}
               selectedId={selectedId}
               onSelect={setSelectedId}
