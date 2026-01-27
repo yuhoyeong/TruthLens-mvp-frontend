@@ -1,280 +1,58 @@
-import type { HistoryDetail, HistoryItem } from "@/types/history";
+import type { JobStatusResponse } from "@/api/types";
 
-export const historyItems: HistoryItem[] = [
-  { id: "h-1", status: "위험", title: "뉴스 기사 이미지", time: "2026-01-11 14:30", kind: "기사" },
-  { id: "h-2", status: "주의", title: "강아지 이미지", time: "2026-01-11 14:30", kind: "이미지" },
-  { id: "h-3", status: "위험", title: "뉴스 기사 이미지", time: "2026-01-11 14:30", kind: "기사" },
-  { id: "h-4", status: "위험", title: "뉴스 기사 이미지", time: "2026-01-11 14:30", kind: "기사" },
-  { id: "h-5", status: "안전", title: "강아지 이미지", time: "2026-01-11 14:30", kind: "이미지" },
-  { id: "h-6", status: "안전", title: "강아지 이미지", time: "2026-01-11 14:30", kind: "이미지" },
-  { id: "h-7", status: "위험", title: "뉴스 기사 이미지", time: "2026-01-11 14:30", kind: "기사" },
-  { id: "h-8", status: "주의", title: "강아지 이미지", time: "2026-01-11 14:30", kind: "이미지" },
-  { id: "h-9", status: "주의", title: "강아지 이미지", time: "2026-01-11 14:30", kind: "이미지" },
-  { id: "h-10", status: "주의", title: "강아지 이미지", time: "2026-01-11 14:30", kind: "이미지" },
-  { id: "h-11", status: "주의", title: "강아지 이미지", time: "2026-01-11 14:30", kind: "이미지" },
-  { id: "h-12", status: "위험", title: "뉴스 기사 이미지", time: "2026-01-11 14:30", kind: "기사" },
-  { id: "h-13", status: "안전", title: "강아지 이미지", time: "2026-01-11 14:30", kind: "이미지" }
+export const historyItems: JobStatusResponse[] = [
+  {
+    job_id: "job-1",
+    status: "completed",
+    input_type: "link",
+    created_at: "2026-01-11T14:30:00Z",
+    updated_at: "2026-01-11T14:31:00Z",
+    completed_at: "2026-01-11T14:31:00Z",
+    result: {
+      scores: {
+        source_reliability: 12,
+        source_consistency: 8,
+        anonymous_sources: 6,
+        fact_verifiability: 10,
+        logical_consistency: 7,
+        emotional_language: 3,
+        evidence_level: 9,
+        title_body_consistency: 4,
+        language_quality: 8,
+        ad_spam: 1,
+      },
+      total_score: 68,
+      risk_level: "medium",
+      summary: "Example summary for a link analysis.",
+      recommendations: ["Verify sources", "Cross-check facts", "Avoid sensational claims"],
+    },
+  },
+  {
+    job_id: "job-2",
+    status: "completed",
+    input_type: "image",
+    created_at: "2026-01-12T09:10:00Z",
+    updated_at: "2026-01-12T09:12:00Z",
+    completed_at: "2026-01-12T09:12:00Z",
+    result: {
+      scores: {
+        source_reliability: 10,
+        source_consistency: 7,
+        anonymous_sources: 5,
+        fact_verifiability: 9,
+        logical_consistency: 6,
+        emotional_language: 2,
+        evidence_level: 8,
+        title_body_consistency: 3,
+        language_quality: 7,
+        ad_spam: 2,
+      },
+      total_score: 59,
+      risk_level: "low",
+      summary: "Example summary for an image analysis.",
+      recommendations: ["Request original source", "Check metadata", "Use reverse image search"],
+    },
+  },
 ];
 
-export const historyDetail: HistoryDetail[] = [
-  {
-    id: "h-1",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-  {
-    id: "h-2",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-  {
-    id: "h-3",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-  {
-    id: "h-4",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-  {
-    id: "h-5",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-  {
-    id: "h-6",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-  {
-    id: "h-7",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-  {
-    id: "h-8",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-  {
-    id: "h-9",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-  {
-    id: "h-10",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-  {
-    id: "h-11",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-  {
-    id: "h-12",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-  {
-    id: "h-13",
-    analyzedAt: "2026-01-11 14:30",
-    imageLabel: "뉴스 기사 이미지",
-    aiScore: 73,
-    scores: [
-      { title: "픽셀 노이즈 패턴", desc: "AI 생성 특유의 체커보드 아티팩트 감지", value: 85 },
-      { title: "메타데이터 무결성", desc: "EXIF 정보 부재 또는 변조 흔적", value: 62 },
-      { title: "맥락적 일관성", desc: "그림자/반사광 물리 법칙 검증", value: 85 },
-      { title: "텍스트 OCR 분석", desc: "이미지 내 텍스트 왜곡도 측정", value: 45 },
-    ],
-    riskSummary:
-      "해당 이미지는 AI 생성 콘텐츠의 전형적인 패턴을 보이며, 상업적 사용 시 법적 위험이 높습니다.",
-    riskRange: "5천만 원 - 2억 원",
-    recommendations: [
-      "해당 콘텐츠의 광고/마케팅 활용은 자제하세요.",
-      "권한 확보 확인 및 저작권 리스크를 검토하세요.",
-      "법률 전문가와 상담 후 사용 여부를 결정하세요.",
-    ],
-  },
-];
+export const historyDetail = historyItems;
