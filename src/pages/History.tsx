@@ -1,3 +1,4 @@
+import type { JobStatusResponse } from "@/api/types";
 import Detail from "@/components/History/Detail";
 import List from "@/components/History/List";
 import { historyDetail, historyItems } from "@/data/history.mock";
@@ -5,8 +6,9 @@ import { CalendarDays, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 export default function History() {
-  const [selectedId, setSelectedId] = useState(historyItems[0]?.id);
-  const detail = historyDetail.find((d) => d.id === selectedId);
+  const items = historyItems as JobStatusResponse[];
+  const [selectedId, setSelectedId] = useState(items[0]?.job_id);
+  const detail = items.find((d) => d.job_id === selectedId);
 
   return (
     <div className="p-8 max-w-[1200px] mx-auto">
@@ -37,12 +39,12 @@ export default function History() {
         </div>
       </header>
 
-      <div className="bg-white border border-neutral-90 rounded-2xl">
+      <div className="bg-white border border-neutral-90">
         <div className="flex flex-col lg:flex-row">
           {/* left side list */}
           <aside className="w-full lg:w-[320px] border-b lg:border-b-0 lg:border-r border-neutral-90">
             <List
-              items={historyItems}
+              items={items}
               selectedId={selectedId}
               onSelect={setSelectedId}
             />
