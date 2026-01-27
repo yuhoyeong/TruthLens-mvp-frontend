@@ -39,7 +39,7 @@ export default function History() {
         </div>
       </header>
 
-      <div className="bg-white border border-neutral-90 rounded-2xl">
+      <div className="bg-white border border-neutral-90">
         <div className="flex flex-col lg:flex-row">
           {/* left side list */}
           <aside className="w-full lg:w-[320px] border-b lg:border-b-0 lg:border-r border-neutral-90">

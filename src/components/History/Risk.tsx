@@ -1,5 +1,4 @@
 import type { JobStatusResponse } from "@/api";
-import type { HistoryDetail } from "@/types/history";
 
 type RiskProps = {
   detail?: JobStatusResponse;
