@@ -1,7 +1,7 @@
 import type { JobStatusResponse } from "@/api/types";
 import Detail from "@/components/History/Detail";
 import List from "@/components/History/List";
-import { historyDetail, historyItems } from "@/data/history.mock";
+import { historyItems } from "@/data/history.mock";
 import { CalendarDays, ChevronDown } from "lucide-react";
 import { useState } from "react";
 

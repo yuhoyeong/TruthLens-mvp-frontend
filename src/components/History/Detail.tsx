@@ -1,3 +1,4 @@
+import React from "react";
 import { FileDown, Share2 } from "lucide-react";
 import ScoreCards from "@/components/History/ScoreCards";
 import Risk from "@/components/History/Risk";
@@ -17,15 +18,13 @@ export default function Detail({ detail }: DetailProps) {
   const score = result?.total_score ?? 0;
   const angle = Math.round((score / 100) * 360);
   const analyzedAt = formatDateTime(
-    detail.completed_at || detail.updated_at || detail.created_at
+    detail.completed_at || detail.updated_at || detail.created_at,
   );
 
   return (
     <main className="flex-1 px-8 py-6">
       <div className="flex items-start justify-between">
-        <h2 className="text-heading-1 text-neutral-10">
-          분석 상세 내역
-        </h2>
+        <h2 className="text-heading-1 text-neutral-10">분석 상세 내역</h2>
         <div className="flex flex-col items-end gap-2">
           <div className="flex items-center gap-2">
             <button className="px-3 py-1 text-caption-2 text-neutral-40 bg-white border border-neutral-90 rounded-4xl flex items-center gap-1">
@@ -44,13 +43,12 @@ export default function Detail({ detail }: DetailProps) {
       </div>
 
       <section className="mt-6">
-        <h3 className="text-headline-1 text-neutral-10 mb-3">
-          분석 사진
-        </h3>
+        <h3 className="text-headline-1 text-neutral-10 mb-3">분석 사진</h3>
         <div className="rounded-2xl border border-neutral-90 p-4 bg-neutral-98">
-          <div className="w-full h-[180px] bg-white border border-neutral-90 rounded-xl flex items-center justify-center text-neutral-60 text-label-2">
-              이미지 미리보기
-            </div>
+          <div className="w-full h-[180px] bg-white border border-neutral-90 rounded-xl flex items-center justify-center text-neutral-60 text-label-2 overflow-hidden">
+            {/* Render backend presigned_url or locally stored preview (preview:{jobId}) */}
+            <RenderImage detail={detail as any} />
+          </div>
         </div>
       </section>
 
@@ -66,18 +64,13 @@ export default function Detail({ detail }: DetailProps) {
             <div
               className="w-60 h-60 rounded-full flex items-center justify-center"
               style={{
-                background:
-                  `conic-gradient(#dc2626 0deg ${angle}deg, #e5e7eb ${angle}deg 360deg)`,
+                background: `conic-gradient(#dc2626 0deg ${angle}deg, #e5e7eb ${angle}deg 360deg)`,
               }}
             >
               <div className="w-32 h-32 rounded-full bg-white border border-neutral-90 flex items-center justify-center">
                 <div>
-                  <span className="text-title-1 text-red-600">
-                    {score}
-                  </span>
-                  <span className="text-caption-2 text-neutral-60">
-                    /100
-                  </span>
+                  <span className="text-title-1 text-red-600">{score}</span>
+                  <span className="text-caption-2 text-neutral-60">/100</span>
                 </div>
               </div>
             </div>
@@ -94,5 +87,50 @@ export default function Detail({ detail }: DetailProps) {
 
       <Risk detail={detail} />
     </main>
+  );
+}
+
+function RenderImage({ detail }: { detail: any }) {
+  const jobId = detail?.job_id;
+  const input =
+    (detail as any)?.input ||
+    (detail as any)?.input_url ||
+    (detail as any)?.input_data;
+  const [src, setSrc] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    // 1) backend presigned URL
+    if (input && typeof input === "object" && input.presigned_url) {
+      setSrc(input.presigned_url);
+      return;
+    }
+
+    // 2) try localStorage preview saved by upload flow
+    if (jobId) {
+      try {
+        const key = `preview:${jobId}`;
+        const stored = localStorage.getItem(key);
+        if (stored) {
+          setSrc(stored);
+          return;
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    setSrc(null);
+  }, [detail, jobId, input]);
+
+  if (!src) {
+    return <div>이미지 미리보기</div>;
+  }
+
+  return (
+    <img
+      src={src}
+      alt="Preview image"
+      className="w-full h-full object-contain"
+    />
   );
 }

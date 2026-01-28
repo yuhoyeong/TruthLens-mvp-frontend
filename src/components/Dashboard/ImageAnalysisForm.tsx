@@ -74,21 +74,35 @@ const ImageAnalysisForm = () => {
           file: selectedFile,
           note: "이미지 위변조 분석 요청",
         });
+        // convert selected file to data URL and persist locally keyed by job id
+        const fileToDataUrl = (file: File) =>
+          new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(String(reader.result));
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+          });
+
+        try {
+          const dataUrl = await fileToDataUrl(selectedFile);
+          try {
+            localStorage.setItem(`preview:${result.job_id}`, dataUrl);
+          } catch (e) {
+            // ignore storage errors
+          }
+        } catch (e) {
+          // ignore conversion errors
+        }
+
         const delayMs = 700;
         setTimeout(() => setCurrentJobId(result.job_id), delayMs);
       } else if (activeTab === "link" && linkInput.trim()) {
-        const inputType =
-          linkInput.includes("/article/") ||
-          linkInput.includes("/news/") ||
-          linkInput.includes(".com/")
-            ? "link"
-            : "image";
+        const inputType = "link";
 
         const result = await analyzeUrlMutation.mutateAsync({
           input_type: inputType,
           url: linkInput.trim(),
-          note:
-            inputType === "link" ? "기사 분석 요청" : "이미지 URL 분석 요청",
+          note: "기사 분석 요청",
         });
         const delayMs = 700;
         setTimeout(() => setCurrentJobId(result.job_id), delayMs);
