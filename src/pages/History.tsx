@@ -1,14 +1,40 @@
 import type { JobStatusResponse } from "@/api/types";
 import Detail from "@/components/History/Detail";
+import HistoryFilters from "@/components/History/Filters";
 import List from "@/components/History/List";
 import { historyItems } from "@/data/history.mock";
-import { CalendarDays, ChevronDown } from "lucide-react";
+import { useHistoryFilters } from "@/hooks/useHistoryFilters";
+import { Calendar, ChevronDown, Menu, TriangleAlert } from "lucide-react";
 import { useState } from "react";
 
 export default function History() {
   const items = historyItems as JobStatusResponse[];
-  const [selectedId, setSelectedId] = useState(items[0]?.job_id);
-  const detail = items.find((d) => d.job_id === selectedId);
+  const {
+      filteredItems,
+      selectedId,
+      setSelectedId,
+
+      isDateOpen,
+      isTypeOpen,
+      isRiskOpen,
+      setIsDateOpen,
+      setIsTypeOpen,
+      setIsRiskOpen,
+
+      dateRange,
+      setDateRange,
+
+      selectedType,
+      setSelectedType,
+      selectedRisk,
+      setSelectedRisk,
+
+      dateLabel,
+      typeLabel,
+      riskLabel,
+  } = useHistoryFilters(items);
+
+  const detail = filteredItems.find((d) => d.job_id === selectedId);
 
   return (
     <div className="p-8 max-w-[1200px] mx-auto">
@@ -22,21 +48,23 @@ export default function History() {
         </div>
 
         {/* toggle */}
-        <div className="p-4 flex items-center gap-2">
-          <CalendarDays size={16} className="text-neutral-50" />
-          <button className="px-3 py-2 text-label-2 text-neutral-50 bg-white border border-neutral-90 rounded-lg flex items-center gap-2">
-            전체 기간
-            <ChevronDown size={14} />
-          </button>
-          <button className="px-3 py-2 text-label-2 text-neutral-50 bg-white border border-neutral-90 rounded-lg flex items-center gap-2">
-            타입
-            <ChevronDown size={14} />
-          </button>
-          <button className="px-3 py-2 text-label-2 text-neutral-50 bg-white border border-neutral-90 rounded-lg flex items-center gap-2">
-            위험도
-            <ChevronDown size={14} />
-          </button>
-        </div>
+        <HistoryFilters
+          dateLabel={dateLabel}
+          typeLabel={typeLabel}
+          riskLabel={riskLabel}
+          isDateOpen={isDateOpen}
+          isTypeOpen={isTypeOpen}
+          isRiskOpen={isRiskOpen}
+          setIsDateOpen={setIsDateOpen}
+          setIsTypeOpen={setIsTypeOpen}
+          setIsRiskOpen={setIsRiskOpen}
+          dateRange={dateRange}
+          setDateRange={setDateRange}
+          selectedType={selectedType}
+          setSelectedType={setSelectedType}
+          selectedRisk={selectedRisk}
+          setSelectedRisk={setSelectedRisk}
+        />
       </header>
 
       <div className="bg-white border border-neutral-90">
@@ -44,7 +72,7 @@ export default function History() {
           {/* left side list */}
           <aside className="w-full lg:w-[320px] border-b lg:border-b-0 lg:border-r border-neutral-90">
             <List
-              items={items}
+              items={filteredItems}
               selectedId={selectedId}
               onSelect={setSelectedId}
             />
