@@ -5,14 +5,16 @@ import type {
   AnalyzeResponse,
   JobStatusResponse,
   ImageAnalyzeRequest,
+  AnalysisResult,
 } from './types';
 import { ApiRequestError } from './errors';
+import { createMockJobStatus } from './mockData';
 
 export const analyzeApi = {
   analyzeUrl: async (request: AnalyzeRequest): Promise<AnalyzeResponse> => {
     const payload = {
-      input_type: request.input_type || 'link',
       url: request.url,
+      input_type: request.input_type || 'link',
       note: request.note,
       client_request_id: request.client_request_id,
     };
@@ -46,6 +48,23 @@ export const analyzeApi = {
     }
   },
   getJobStatus: async (jobId: string): Promise<JobStatusResponse> => {
-    return apiClient.get<JobStatusResponse>(ENDPOINTS.JOB_STATUS(jobId));
+    const res = await apiClient.get<JobStatusResponse>(ENDPOINTS.JOB_STATUS(jobId));
+
+    // Detect placeholder/stubbed results from the backend and substitute with mock.
+    // Conditions handled:
+    // - result contains a `status` like 'stubbed'
+    // - result.message mentions pending GPU/service
+    // - result lacks numeric `total_score` or `scores` entries
+    const isPlaceholderResult = (result?: unknown) => {
+      if (!result) return false;
+      if (typeof result.status === 'string' && result.status === 'stubbed') return true;
+      return false;
+    };
+
+    if (res.result && isPlaceholderResult(res.result)) {
+      return createMockJobStatus(jobId);
+    }
+
+    return res;
   },
 };
