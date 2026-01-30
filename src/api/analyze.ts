@@ -5,7 +5,6 @@ import type {
   AnalyzeResponse,
   JobStatusResponse,
   ImageAnalyzeRequest,
-  AnalysisResult,
 } from './types';
 import { ApiRequestError } from './errors';
 import { createMockJobStatus } from './mockData';
@@ -50,15 +49,9 @@ export const analyzeApi = {
   getJobStatus: async (jobId: string): Promise<JobStatusResponse> => {
     const res = await apiClient.get<JobStatusResponse>(ENDPOINTS.JOB_STATUS(jobId));
 
-    // Detect placeholder/stubbed results from the backend and substitute with mock.
-    // Conditions handled:
-    // - result contains a `status` like 'stubbed'
-    // - result.message mentions pending GPU/service
-    // - result lacks numeric `total_score` or `scores` entries
-    const isPlaceholderResult = (result?: unknown) => {
-      if (!result) return false;
-      if (typeof result.status === 'string' && result.status === 'stubbed') return true;
-      return false;
+    // result가 AnalysisResult 타입인지 확인
+    const isPlaceholderResult = (result?: unknown): result is { status: string } => {
+      return !!result && typeof result === 'object' && 'status' in result && (result as any).status === 'stubbed';
     };
 
     if (res.result && isPlaceholderResult(res.result)) {

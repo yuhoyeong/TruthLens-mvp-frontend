@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'https://api-production-32c8.up.railway.app';
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const ENDPOINTS = {
   ANALYZE: '/api/v1/analyze',

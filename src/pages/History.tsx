@@ -4,34 +4,32 @@ import HistoryFilters from "@/components/History/Filters";
 import List from "@/components/History/List";
 import { historyItems } from "@/data/history.mock";
 import { useHistoryFilters } from "@/hooks/useHistoryFilters";
-import { Calendar, ChevronDown, Menu, TriangleAlert } from "lucide-react";
-import { useState } from "react";
 
 export default function History() {
   const items = historyItems as JobStatusResponse[];
   const {
-      filteredItems,
-      selectedId,
-      setSelectedId,
+    filteredItems,
+    selectedId,
+    setSelectedId,
 
-      isDateOpen,
-      isTypeOpen,
-      isRiskOpen,
-      setIsDateOpen,
-      setIsTypeOpen,
-      setIsRiskOpen,
+    isDateOpen,
+    isTypeOpen,
+    isRiskOpen,
+    setIsDateOpen,
+    setIsTypeOpen,
+    setIsRiskOpen,
 
-      dateRange,
-      setDateRange,
+    dateRange,
+    setDateRange,
 
-      selectedType,
-      setSelectedType,
-      selectedRisk,
-      setSelectedRisk,
+    selectedType,
+    setSelectedType,
+    selectedRisk,
+    setSelectedRisk,
 
-      dateLabel,
-      typeLabel,
-      riskLabel,
+    dateLabel,
+    typeLabel,
+    riskLabel,
   } = useHistoryFilters(items);
 
   const detail = filteredItems.find((d) => d.job_id === selectedId);
